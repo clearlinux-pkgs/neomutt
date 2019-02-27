@@ -1,0 +1,11 @@
+--with-mailpath=/var/spool/mail/
+--enable-imap
+--enable-pop
+--enable-smtp
+--with-gnutls=yes
+--with-gss=yes
+--with-notmuch=yes
+--with-sasl=yes
+--enable-sidebar
+--enable-hcache
+--enable-debug

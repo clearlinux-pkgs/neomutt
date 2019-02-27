@@ -1,0 +1,37 @@
+From b110a6133ffa0d167bf1cb3cf6322512c8606d33 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Wed, 27 Feb 2019 12:16:45 -0800
+Subject: [PATCH] Disable error on invalid configure item
+
+---
+ autosetup/autosetup | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/autosetup/autosetup b/autosetup/autosetup
+index 63441bb..2d005c5 100755
+--- a/autosetup/autosetup
++++ b/autosetup/autosetup
+@@ -636,13 +636,13 @@ proc options {optlist} {
+ 	}
+ 
+ 	# Check for invalid options
+-	if {[opt-bool option-checking]} {
+-		foreach o [dict keys $::autosetup(getopt)] {
+-			if {$o ni $::autosetup(options)} {
+-				user-error "Unknown option --$o"
+-			}
+-		}
+-	}
++	# if {[opt-bool option-checking]} {
++	# 	foreach o [dict keys $::autosetup(getopt)] {
++	# 		if {$o ni $::autosetup(options)} {
++	# 			user-error "Unknown option --$o"
++	# 		}
++	# 	}
++	# }
+ }
+ 
+ # @options-defaults dictionary
+-- 
+2.20.1
+
