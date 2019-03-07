@@ -4,7 +4,7 @@
 #
 Name     : neomutt
 Version  : 20180716
-Release  : 1
+Release  : 2
 URL      : https://github.com/neomutt/neomutt/archive/neomutt-20180716.tar.gz
 Source0  : https://github.com/neomutt/neomutt/archive/neomutt-20180716.tar.gz
 Summary  : No detailed summary available
@@ -23,6 +23,7 @@ BuildRequires : krb5-dev
 BuildRequires : libidn-dev
 BuildRequires : libxml2
 BuildRequires : libxslt
+BuildRequires : lmdb-dev
 BuildRequires : ncurses-dev
 BuildRequires : notmuch-dev
 Patch1: 0001-Disable-error-on-invalid-configure-item.patch
@@ -98,7 +99,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1551303372
+export SOURCE_DATE_EPOCH=1552000870
 export LDFLAGS="${LDFLAGS} -fno-lto"
 %configure --disable-static --with-mailpath=/var/spool/mail/ \
 --enable-imap \
@@ -110,11 +111,12 @@ export LDFLAGS="${LDFLAGS} -fno-lto"
 --with-sasl=yes \
 --enable-sidebar \
 --enable-hcache \
---enable-debug
+--enable-debug \
+--with-lmdb=yes
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1551303372
+export SOURCE_DATE_EPOCH=1552000870
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/neomutt
 cp LICENSE.md %{buildroot}/usr/share/package-licenses/neomutt/LICENSE.md

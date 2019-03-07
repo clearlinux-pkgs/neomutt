@@ -9,3 +9,4 @@
 --enable-sidebar
 --enable-hcache
 --enable-debug
+--with-lmdb=yes

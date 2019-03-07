@@ -6,6 +6,7 @@ libgssapi_krb5.so.2
 libidn.so.12
 libk5crypto.so.3
 libkrb5.so.3
+liblmdb.so
 libncursesw.so.6
 libnotmuch.so.5
 libsasl2.so.3
