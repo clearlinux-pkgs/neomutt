@@ -4,7 +4,7 @@
 #
 Name     : neomutt
 Version  : 20180716
-Release  : 2
+Release  : 3
 URL      : https://github.com/neomutt/neomutt/archive/neomutt-20180716.tar.gz
 Source0  : https://github.com/neomutt/neomutt/archive/neomutt-20180716.tar.gz
 Summary  : No detailed summary available
