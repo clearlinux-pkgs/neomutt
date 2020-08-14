@@ -1,4 +1,4 @@
-20180716
+20200626
 cyrus-sasl-dev
 docbook-xml
 e2fsprogs-dev
@@ -6,5 +6,4 @@ gnutls-dev
 krb5-dev
 libidn-dev
 lmdb-dev
-ncurses-dev
 notmuch-dev

@@ -1,11 +1,8 @@
 libanl.so.1
 libc.so.6
-libcom_err.so.2
 libgnutls.so.30
 libgssapi_krb5.so.2
 libidn.so.12
-libk5crypto.so.3
-libkrb5.so.3
 liblmdb.so
 libncursesw.so.6
 libnotmuch.so.5
