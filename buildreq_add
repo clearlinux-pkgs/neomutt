@@ -1,5 +1,13 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
+cyrus-sasl-dev
+docbook-xml
+e2fsprogs-dev
+gnutls-dev
+krb5-dev
+libidn-dev
 libxml2
 libxslt
+lmdb-dev
 ncurses-dev
+notmuch-dev

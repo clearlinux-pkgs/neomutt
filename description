@@ -1,0 +1,5 @@
+NeoMutt is a command line mail reader (or MUA). It is a fork of Mutt with added
+features. The NeoMutt project is hoping to kick-start development on the Mutt
+project. NeoMutt has already attracted about twenty developers and enthusiasts.
+Lots of old Mutt patches have been brought up-to-date, tidied and documented.
+Notably, the Sidebar patch has now been adopted by upstream Mutt.
