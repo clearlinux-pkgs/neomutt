@@ -1,5 +1,5 @@
 PKG_NAME := neomutt
-URL = https://github.com/neomutt/neomutt/archive/20210205/neomutt-20210205.tar.gz
+URL = https://github.com/neomutt/neomutt/archive/20211015/neomutt-20211015.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
