@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : neomutt
-Version  : 20230322
-Release  : 18
-URL      : https://github.com/neomutt/neomutt/archive/20230322/neomutt-20230322.tar.gz
-Source0  : https://github.com/neomutt/neomutt/archive/20230322/neomutt-20230322.tar.gz
+Version  : 20230407
+Release  : 19
+URL      : https://github.com/neomutt/neomutt/archive/20230407/neomutt-20230407.tar.gz
+Source0  : https://github.com/neomutt/neomutt/archive/20230407/neomutt-20230407.tar.gz
 Summary  : A version of mutt with added features
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0
@@ -17,6 +17,7 @@ Requires: neomutt-libexec = %{version}-%{release}
 Requires: neomutt-license = %{version}-%{release}
 Requires: neomutt-locales = %{version}-%{release}
 Requires: neomutt-man = %{version}-%{release}
+BuildRequires : buildreq-configure
 BuildRequires : cyrus-sasl-dev
 BuildRequires : docbook-xml
 BuildRequires : e2fsprogs-dev
@@ -102,8 +103,8 @@ man components for the neomutt package.
 
 
 %prep
-%setup -q -n neomutt-20230322
-cd %{_builddir}/neomutt-20230322
+%setup -q -n neomutt-20230407
+cd %{_builddir}/neomutt-20230407
 %patch1 -p1
 
 %build
@@ -111,7 +112,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1679583662
+export SOURCE_DATE_EPOCH=1680890281
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
@@ -132,7 +133,7 @@ export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -f
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1679583662
+export SOURCE_DATE_EPOCH=1680890281
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/neomutt
 cp %{_builddir}/neomutt-%{version}/LICENSE.md %{buildroot}/usr/share/package-licenses/neomutt/b11b797fa13b0935d0e0b13a84f7dd413f9d6ab3 || :
