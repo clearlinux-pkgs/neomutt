@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : neomutt
-Version  : 20230407
-Release  : 19
-URL      : https://github.com/neomutt/neomutt/archive/20230407/neomutt-20230407.tar.gz
-Source0  : https://github.com/neomutt/neomutt/archive/20230407/neomutt-20230407.tar.gz
+Version  : 20230512
+Release  : 20
+URL      : https://github.com/neomutt/neomutt/archive/20230512/neomutt-20230512.tar.gz
+Source0  : https://github.com/neomutt/neomutt/archive/20230512/neomutt-20230512.tar.gz
 Summary  : A version of mutt with added features
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0
@@ -103,21 +103,24 @@ man components for the neomutt package.
 
 
 %prep
-%setup -q -n neomutt-20230407
-cd %{_builddir}/neomutt-20230407
+%setup -q -n neomutt-20230512
+cd %{_builddir}/neomutt-20230512
 %patch1 -p1
+pushd ..
+cp -a neomutt-20230512 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680890281
+export SOURCE_DATE_EPOCH=1683902054
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 %configure --disable-static --with-mailpath=/var/spool/mail/ \
 --enable-imap \
 --enable-pop \
@@ -132,20 +135,46 @@ export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -f
 --with-lmdb=yes
 make  %{?_smp_mflags}
 
+unset PKG_CONFIG_PATH
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+%configure --disable-static --with-mailpath=/var/spool/mail/ \
+--enable-imap \
+--enable-pop \
+--enable-smtp \
+--with-gnutls=yes \
+--with-gss=yes \
+--with-notmuch=yes \
+--with-sasl=yes \
+--enable-sidebar \
+--enable-hcache \
+--enable-debug \
+--with-lmdb=yes
+make  %{?_smp_mflags}
+popd
 %install
-export SOURCE_DATE_EPOCH=1680890281
+export SOURCE_DATE_EPOCH=1683902054
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/neomutt
 cp %{_builddir}/neomutt-%{version}/LICENSE.md %{buildroot}/usr/share/package-licenses/neomutt/b11b797fa13b0935d0e0b13a84f7dd413f9d6ab3 || :
 cp %{_builddir}/neomutt-%{version}/autosetup/LICENSE %{buildroot}/usr/share/package-licenses/neomutt/34b2f1d7acba3eeb992e4281307640989cd08d0a || :
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
 %find_lang neomutt
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/neomutt
 /usr/bin/neomutt
 
 %files data
@@ -172,10 +201,11 @@ cp %{_builddir}/neomutt-%{version}/autosetup/LICENSE %{buildroot}/usr/share/pack
 
 %files doc
 %defattr(0644,root,root,0755)
-%doc /usr/share/doc/neomutt/*
+/usr/share/doc/neomutt/*
 
 %files libexec
 %defattr(-,root,root,-)
+/V3/usr/libexec/neomutt/pgpewrap
 /usr/libexec/neomutt/pgpewrap
 /usr/libexec/neomutt/smime_keys
 
