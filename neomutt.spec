@@ -7,7 +7,7 @@
 #
 Name     : neomutt
 Version  : 20231103
-Release  : 26
+Release  : 27
 URL      : https://github.com/neomutt/neomutt/archive/20231103/neomutt-20231103.tar.gz
 Source0  : https://github.com/neomutt/neomutt/archive/20231103/neomutt-20231103.tar.gz
 Summary  : A version of mutt with added features
@@ -117,7 +117,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1699021343
+export SOURCE_DATE_EPOCH=1699282877
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -130,17 +130,11 @@ FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 %configure --disable-static --with-mailpath=/var/spool/mail/ \
---enable-imap \
---enable-pop \
---enable-smtp \
---with-gnutls=yes \
---with-gss=yes \
---with-notmuch=yes \
---with-sasl=yes \
---enable-sidebar \
---enable-hcache \
---enable-debug \
---with-lmdb=yes
+--gnutls \
+--gss \
+--notmuch \
+--sasl \
+--lmdb
 make  %{?_smp_mflags}
 
 unset PKG_CONFIG_PATH
@@ -151,17 +145,11 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -m64 -march=x86-64-v3 "
 LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
 %configure --disable-static --with-mailpath=/var/spool/mail/ \
---enable-imap \
---enable-pop \
---enable-smtp \
---with-gnutls=yes \
---with-gss=yes \
---with-notmuch=yes \
---with-sasl=yes \
---enable-sidebar \
---enable-hcache \
---enable-debug \
---with-lmdb=yes
+--gnutls \
+--gss \
+--notmuch \
+--sasl \
+--lmdb
 make  %{?_smp_mflags}
 popd
 %install
@@ -176,7 +164,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1699021343
+export SOURCE_DATE_EPOCH=1699282877
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/neomutt
 cp %{_builddir}/neomutt-%{version}/LICENSE.md %{buildroot}/usr/share/package-licenses/neomutt/b11b797fa13b0935d0e0b13a84f7dd413f9d6ab3 || :
