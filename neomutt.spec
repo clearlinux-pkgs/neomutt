@@ -6,10 +6,10 @@
 # autospec commit: 5905be9
 #
 Name     : neomutt
-Version  : 20240416
-Release  : 33
-URL      : https://github.com/neomutt/neomutt/archive/20240416/neomutt-20240416.tar.gz
-Source0  : https://github.com/neomutt/neomutt/archive/20240416/neomutt-20240416.tar.gz
+Version  : 20240425
+Release  : 34
+URL      : https://github.com/neomutt/neomutt/archive/20240425/neomutt-20240425.tar.gz
+Source0  : https://github.com/neomutt/neomutt/archive/20240425/neomutt-20240425.tar.gz
 Summary  : A version of mutt with added features
 Group    : Development/Tools
 License  : BSD-2-Clause
@@ -105,11 +105,11 @@ man components for the neomutt package.
 
 
 %prep
-%setup -q -n neomutt-20240416
-cd %{_builddir}/neomutt-20240416
+%setup -q -n neomutt-20240425
+cd %{_builddir}/neomutt-20240425
 %patch -P 1 -p1
 pushd ..
-cp -a neomutt-20240416 buildavx2
+cp -a neomutt-20240425 buildavx2
 popd
 
 %build
@@ -117,7 +117,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1713281571
+export SOURCE_DATE_EPOCH=1714058272
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -166,7 +166,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1713281571
+export SOURCE_DATE_EPOCH=1714058272
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/neomutt
 cp %{_builddir}/neomutt-%{version}/autosetup/LICENSE %{buildroot}/usr/share/package-licenses/neomutt/34b2f1d7acba3eeb992e4281307640989cd08d0a || :
