@@ -7,7 +7,7 @@
 #
 Name     : neomutt
 Version  : 20250404
-Release  : 40
+Release  : 41
 URL      : https://github.com/neomutt/neomutt/archive/20250404/neomutt-20250404.tar.gz
 Source0  : https://github.com/neomutt/neomutt/archive/20250404/neomutt-20250404.tar.gz
 Summary  : A version of mutt with added features
