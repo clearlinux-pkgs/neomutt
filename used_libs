@@ -1,0 +1,8 @@
+libc.so.6
+libgnutls.so.30
+libgssapi_krb5.so.2
+libidn2.so.0
+liblmdb.so
+libncursesw.so.6
+libnotmuch.so.5
+libsasl2.so.3
